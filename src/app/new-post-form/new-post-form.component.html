@@ -1,0 +1,21 @@
+<div class="new-post-form">
+    <p>Citta'</p><br>
+    <mat-form-field class="city-field" appearance="outline" >
+      <mat-label>es. Roma, Milano, Napoli</mat-label>
+      <input matInput>
+    </mat-form-field>
+    <p>Post</p><br>
+    <mat-form-field class="post-field" appearance="outline">
+      <mat-label>Inserisci qui... </mat-label>
+      <textarea matInput
+                cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize"
+                cdkAutosizeMinRows="5"
+                cdkAutosizeMaxRows="7"></textarea>
+    </mat-form-field>
+  
+  </div>
+  <div>
+    <app-pubblica-button></app-pubblica-button>
+</div>
+  
