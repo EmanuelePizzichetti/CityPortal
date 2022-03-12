@@ -2,20 +2,26 @@
     <p>Citta'</p><br>
     <mat-form-field class="city-field" appearance="outline" >
       <mat-label>es. Roma, Milano, Napoli</mat-label>
-      <input matInput>
+      <input matInput id="city-input">
+    </mat-form-field>
+    <p>Titolo</p><br>
+    <mat-form-field class="title-field" appearance="outline" >
+      <mat-label>Inserisci qui...</mat-label>
+      <input matInput id="title-input">
     </mat-form-field>
     <p>Post</p><br>
     <mat-form-field class="post-field" appearance="outline">
       <mat-label>Inserisci qui... </mat-label>
       <textarea matInput
+                id="post-input"
                 cdkTextareaAutosize
                 #autosize="cdkTextareaAutosize"
                 cdkAutosizeMinRows="5"
                 cdkAutosizeMaxRows="7"></textarea>
     </mat-form-field>
-  
+
   </div>
   <div>
-    <app-pubblica-button></app-pubblica-button>
+    <app-pubblica-button class="button-field"></app-pubblica-button>
 </div>
   

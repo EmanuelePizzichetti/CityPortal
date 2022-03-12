@@ -14,6 +14,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
 import { PubblicaButtonComponent } from './pubblica-button/pubblica-button.component';
+import {HttpClientModule} from '@angular/common/http';
+import { ApiserviceService } from './apiservice.service';
 
 @NgModule({
   declarations: [
@@ -32,9 +34,10 @@ import { PubblicaButtonComponent } from './pubblica-button/pubblica-button.compo
     TextFieldModule,
     MatButtonModule,
     MatInputModule,
-    MatCardModule
+    MatCardModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [ApiserviceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
