@@ -1,6 +1,9 @@
-<router-outlet name="new-post-place"></router-outlet>
 <div>
-    <app-new-post-button></app-new-post-button>
+    <div class="new-post-button">
+        <button mat-flat-button color="primary" (click)="openNewPostForm()">Nuovo Post</button>
+    </div>
 </div>
-
-
+<div *ngFor="let post of posts.slice().reverse()">
+    <app-new-post-card [post]="post"></app-new-post-card>
+    <br><br> 
+</div>

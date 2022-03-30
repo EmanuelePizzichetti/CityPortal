@@ -2,18 +2,19 @@
     <p>Citta'</p><br>
     <mat-form-field class="city-field" appearance="outline" >
       <mat-label>es. Roma, Milano, Napoli</mat-label>
-      <input matInput id="city-input">
+      <input matInput id="city-input" [(ngModel)]="model.citta_post">
     </mat-form-field>
     <p>Titolo</p><br>
     <mat-form-field class="title-field" appearance="outline" >
       <mat-label>Inserisci qui...</mat-label>
-      <input matInput id="title-input">
+      <input matInput id="title-input" [(ngModel)]="model.titolo_post">
     </mat-form-field>
     <p>Post</p><br>
     <mat-form-field class="post-field" appearance="outline">
       <mat-label>Inserisci qui... </mat-label>
       <textarea matInput
                 id="post-input"
+                [(ngModel)]="model.contenuto_post"
                 cdkTextareaAutosize
                 #autosize="cdkTextareaAutosize"
                 cdkAutosizeMinRows="5"
@@ -21,7 +22,7 @@
     </mat-form-field>
 
   </div>
-  <div>
-    <app-pubblica-button class="button-field"></app-pubblica-button>
+  <div class="pubblica-button">
+    <button mat-flat-button color="primary" (click)="pubblica()">Pubblica</button>
 </div>
   

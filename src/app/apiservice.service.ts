@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { NewPostCardComponent } from './new-post-card/new-post-card.component';
+import { Post } from './models/post';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -9,23 +11,41 @@ import { NewPostCardComponent } from './new-post-card/new-post-card.component';
 export class ApiserviceService {
 
   constructor(private _http:HttpClient) { }
-
-  postUrl = 'http://localhost:3000/post';
-  userUrl = 'http://localhost:3000/utenti';
-   
   
-  getAllData():Observable<any>
+  getAllPost():Observable<any>
   {
-    return this._http.get(this.postUrl);
+    return this._http.get(environment.postUrl);
   }
   
-  getByNome(nome:string):Observable<any>
+  /*
+  getUserByNome(nome:String):Observable<any>
   {
-    return this._http.get(this.userUrl + '/' + nome);
+    return this._http.get(this.utentiUrl + '/' + nome);
+  }
+  */
+
+  getUserById(ID:Number):Observable<any>
+  {
+    return this._http.get(environment.utentiUrl + '/' + ID);
+  }
+
+  getCittaByNome(nome:String):Observable<any>
+  {
+    return this._http.get(environment.cittaUrl + '/nome/' + nome);
+  }
+
+  getCittaById(ID:Number):Observable<any>
+  {
+    return this._http.get(environment.cittaUrl + '/' + ID);
   }
     
-  createData(data:NewPostCardComponent):Observable<any>
+  createPost(data:Post):Observable<any>
   {
-    return this._http.post(this.postUrl, data);
+    return this._http.post(environment.postUrl, data);
+  }
+
+  createCitta(data:Post):Observable<any>
+  {
+    return this._http.post(environment.cittaUrl, data);
   }
 }

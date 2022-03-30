@@ -3,6 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  postUrl: 'http://localhost:3000/post',
+  utentiUrl: 'http://localhost:3000/utenti',
+  cittaUrl: 'http://localhost:3000/citta',
   production: false
 };
 

@@ -49,9 +49,9 @@ app.get('/post/:id', (req,res)=>{
 
 app.post('/post', (req,res) => {
     let idUtente = 1;
-    let idCitta = 3;
-    let titoloPost = req.body.titoloPost;
-    let contenutoPost = req.body.contenutoPost;
+    let idCitta = req.body.citta_post;
+    let titoloPost = req.body.titolo_post;
+    let contenutoPost = req.body.contenuto_post;
     let query = "insert into post(titolo_post,contenuto_post,id_utente_fk,id_citta_fk) values('"+titoloPost+"','"+contenutoPost+"',"+idUtente+","+idCitta+")";
     db.query(query,(err, result) => {
         if(err){
@@ -68,11 +68,10 @@ app.post('/post', (req,res) => {
 
 app.put('/post/:id', (req,res) => {
     let ID = req.params.id
-    let nomeUtente = req.body.nomeUtente;
-    let titoloPost = req.body.titoloPost;
-    let contenutoPost = req.body.contenutoPost;
-    let cittaPost = req.body.cittaPost;
-
+    let nomeUtente = req.body.nome_utente;
+    let titoloPost = req.body.titolo_post;
+    let contenutoPost = req.body.contenuto_post;
+    let cittaPost = req.body.citta_post;
     let query = "update post set nome_utente='"+nomeUtente+"', titolo_post='"+titoloPost+"', contenuto_post='"+contenutoPost+"', citta_post='"+cittaPost+"' where id_post_pk='"+ID+"'" ;
     db.query((query), (err,result) => {
         if(err){

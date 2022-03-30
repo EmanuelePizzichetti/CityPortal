@@ -1,9 +1,10 @@
 <mat-card class="new-post-card">
-    <mat-card-title>{{titoloPost}}</mat-card-title>
-    <mat-card-subtitle>{{nomeUtente}}</mat-card-subtitle>
-    <mat-card-subtitle>{{cittaUtente}}</mat-card-subtitle>
-    <mat-card-content>
-        {{contenutoPost}}
-      </mat-card-content>
+  <mat-card-title>{{post.titolo_post}}</mat-card-title>
+  <mat-card-subtitle>{{post.citta_post}}</mat-card-subtitle>
+  <br>
+  <mat-card-subtitle>{{post.nome_utente}} - Vive a {{post.citta_utente}}</mat-card-subtitle>
+  <mat-card-content>
+    {{post.contenuto_post}}
+  </mat-card-content>
 
 </mat-card>

@@ -7,15 +7,15 @@ const app = express();
 app.use(cors());
 app.use(bodyparser.json());
 
-app.get('/utenti', (req,res)=>{
-    let query = "select * from utenti";
+app.get('/citta', (req,res)=>{
+    let query = "select * from citta";
     db.query(query, (err,result) => {
         if(err){
             console.log('Errore');
         }
         if(result){
             res.send({
-                message: "Tutti gli utenti",
+                message: "Tutte le città",
                 data: result
             })
         } else {
@@ -27,9 +27,9 @@ app.get('/utenti', (req,res)=>{
     );
 })
 
-app.get('/utenti/:id', (req,res)=>{
+app.get('/citta/:id', (req,res)=>{
     let ID = req.params.id
-    let query = "select * from utenti where id_utente_pk ='"+ ID +"'";
+    let query = "select * from citta where id_citta_pk ='"+ ID +"'";
     db.query(query, (err,result) => {
         if(err){
             console.log('Errore');
@@ -46,17 +46,15 @@ app.get('/utenti/:id', (req,res)=>{
     });
 })
 
-/*
-app.get('/utenti/:nome', (req,res)=>{
-    let nomeUtente = req.params.nome;
-    let query = "select * from utenti where nome_utente ='"+ nomeUtente +"'";
+app.get('/citta/nome/:nome', (req,res)=>{
+    let nomeCitta = req.params.nome;
+    let query = "select id_citta_pk from citta where nome_citta ='"+ nomeCitta +"'";
     db.query(query, (err,result) => {
         if(err){
             console.log('Errore');
         }
         if(result){
             res.send({
-                message: "utente con nome " + nomeUtente,
                 data: result
             })
         } else {
@@ -66,6 +64,21 @@ app.get('/utenti/:nome', (req,res)=>{
         }
     });
 })
-*/
+
+app.post('/citta', (req,res) => {
+    let nomeCitta = req.body.citta_post;
+    let query = "insert into citta(nome_citta) values('"+nomeCitta+"')";
+    db.query(query,(err, result) => {
+        if(err){
+            console.log('Errore');
+        }
+        if(result){
+            res.send({
+                message: "Citta' inserita",
+                data: result
+            })
+        } 
+    }) 
+})
 
 module.exports = app;
