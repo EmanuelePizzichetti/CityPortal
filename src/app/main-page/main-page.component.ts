@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiserviceService } from '../apiservice.service';
@@ -23,11 +22,3 @@ export class MainPageComponent implements OnInit {
     this.route.navigate(['/app-new-post-form']);
   }
 }
-
-function newPostReload() {
-  //let service: ApiserviceService = new ApiserviceService(new HttpClient);
-  //service.getAllPost().subscribe((res)=>{
-
- // })
-}
-

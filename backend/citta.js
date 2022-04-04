@@ -8,8 +8,7 @@ app.use(cors());
 app.use(bodyparser.json());
 
 app.get('/citta', (req,res)=>{
-    let query = "select * from citta";
-    db.query(query, (err,result) => {
+    db.query('select * from citta', (err,result) => {
         if(err){
             console.log('Errore');
         }
@@ -29,8 +28,7 @@ app.get('/citta', (req,res)=>{
 
 app.get('/citta/:id', (req,res)=>{
     let ID = req.params.id
-    let query = "select * from citta where id_citta_pk ='"+ ID +"'";
-    db.query(query, (err,result) => {
+    db.query('select * from citta where id_citta_pk = ?', [ID], (err,result) => {
         if(err){
             console.log('Errore');
         }
@@ -48,8 +46,7 @@ app.get('/citta/:id', (req,res)=>{
 
 app.get('/citta/nome/:nome', (req,res)=>{
     let nomeCitta = req.params.nome;
-    let query = "select id_citta_pk from citta where nome_citta ='"+ nomeCitta +"'";
-    db.query(query, (err,result) => {
+    db.query('select id_citta_pk from citta where nome_citta = ?', [nomeCitta], (err,result) => {
         if(err){
             console.log('Errore');
         }
@@ -67,8 +64,7 @@ app.get('/citta/nome/:nome', (req,res)=>{
 
 app.post('/citta', (req,res) => {
     let nomeCitta = req.body.citta_post;
-    let query = "insert into citta(nome_citta) values('"+nomeCitta+"')";
-    db.query(query,(err, result) => {
+    db.query('insert into citta(nome_citta) values(?)', [nomeCitta],(err, result) => {
         if(err){
             console.log('Errore');
         }

@@ -8,8 +8,7 @@ app.use(cors());
 app.use(bodyparser.json());
 
 app.get('/utenti', (req,res)=>{
-    let query = "select * from utenti";
-    db.query(query, (err,result) => {
+    db.query('select * from utenti', (err,result) => {
         if(err){
             console.log('Errore');
         }
@@ -29,8 +28,7 @@ app.get('/utenti', (req,res)=>{
 
 app.get('/utenti/:id', (req,res)=>{
     let ID = req.params.id
-    let query = "select * from utenti where id_utente_pk ='"+ ID +"'";
-    db.query(query, (err,result) => {
+    db.query('select * from utenti where id_utente_pk = ?', [ID], (err,result) => {
         if(err){
             console.log('Errore');
         }
@@ -45,27 +43,5 @@ app.get('/utenti/:id', (req,res)=>{
         }
     });
 })
-
-/*
-app.get('/utenti/:nome', (req,res)=>{
-    let nomeUtente = req.params.nome;
-    let query = "select * from utenti where nome_utente ='"+ nomeUtente +"'";
-    db.query(query, (err,result) => {
-        if(err){
-            console.log('Errore');
-        }
-        if(result){
-            res.send({
-                message: "utente con nome " + nomeUtente,
-                data: result
-            })
-        } else {
-            res.send({
-                message: "Non sono stati trovati valori" 
-            }) 
-        }
-    });
-})
-*/
 
 module.exports = app;
