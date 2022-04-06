@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ApiserviceService } from '../apiservice.service';
+import { PostService } from 'src/services/post.service';
 import { Post } from '../models/post';
 
 @Component({
@@ -10,10 +10,10 @@ import { Post } from '../models/post';
 })
 export class MainPageComponent implements OnInit {
   public posts: Post[] = [];
-  constructor(private route:Router, private apiService : ApiserviceService) { }
+  constructor(private route:Router, private _post: PostService) { }
 
   ngOnInit(): void {
-    this.apiService.getAllPost().subscribe((res)=>{
+    this._post.getAllPost().subscribe((res)=>{
       this.posts = res.data;
     })
   }

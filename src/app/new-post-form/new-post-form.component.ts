@@ -2,8 +2,9 @@ import { Component, NgZone, OnInit, ViewChild } from '@angular/core';
 import {CdkTextareaAutosize} from '@angular/cdk/text-field';
 import {take} from 'rxjs/operators';
 import { Post } from '../models/post';
-import { ApiserviceService } from '../apiservice.service';
 import { Router } from '@angular/router';
+import { CittaService } from 'src/services/citta.service';
+import { PostService } from 'src/services/post.service';
 
 @Component({
   selector: 'app-new-post-form',
@@ -14,30 +15,38 @@ export class NewPostFormComponent implements OnInit {
 
   public model: Post = new Post();
 
-  constructor(private route: Router, private _ngZone: NgZone, private apiService: ApiserviceService) { }
+  constructor(private route: Router, private _ngZone: NgZone, private _citta: CittaService, private _post: PostService) { }
 
   ngOnInit(): void {
   }
 
   public pubblica() {
     if(!(this.model.citta_post.replace(/\s/g, '').length == 0 || this.model.titolo_post.replace(/\s/g, '').length == 0 || this.model.contenuto_post.replace(/\s/g, '').length == 0)) {
-      //TODO: risolvi problema dello spazio alla fine della citta
-      this.apiService.getCittaByNome(this.model.citta_post).subscribe((res)=>{
+      this.sistemaStringa();
+      this._citta.getCittaByNome(this.model.citta_post).subscribe((res)=>{
         if(res.data[0] === undefined) {
-          this.apiService.createCitta(this.model).subscribe((res)=>{
+          this._citta.createCitta(this.model).subscribe((res)=>{
             console.log(res);
           })
         }
-        this.apiService.getCittaByNome(this.model.citta_post).subscribe((res)=>{
+        this._citta.getCittaByNome(this.model.citta_post).subscribe((res)=>{
           this.model.citta_post = res.data[0].id_citta_pk.toString();
-          this.apiService.createPost(this.model).subscribe((res)=>{
+          this._post.createPost(this.model).subscribe((res)=>{
             console.log(res);
             this.backHome();
           })  
         })
       })
     }
-    //da aggiungere alert di spazi vuoti (in un altro metodo)
+    else {
+      alert("Non puoi inserire solo spazi vuoti nei campi");
+    }
+  }
+
+  sistemaStringa() {
+    this.model.citta_post = this.model.citta_post.trim();
+    this.model.citta_post = this.model.citta_post.replace(/\s\s+/g, ' ');
+    this.model.citta_post = this.model.citta_post.toLowerCase();
   }
   
   backHome() {
