@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { NewPostCardComponent } from './new-post-card/new-post-card.component';
 import { Post } from './models/post';
 import { environment } from 'src/environments/environment';
 
@@ -38,6 +37,11 @@ export class ApiserviceService {
   {
     return this._http.get(environment.cittaUrl + '/' + ID);
   }
+
+  getRisposteByPost(ID:Number):Observable<any>
+  {
+    return this._http.get(environment.risposteUrl + '/' + ID);
+  }
     
   createPost(data:Post):Observable<any>
   {
@@ -47,5 +51,10 @@ export class ApiserviceService {
   createCitta(data:Post):Observable<any>
   {
     return this._http.post(environment.cittaUrl, data);
+  }
+
+  createRisposta(data: any):Observable<any>
+  {
+    return this._http.post(environment.risposteUrl, data)
   }
 }

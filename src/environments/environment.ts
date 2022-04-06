@@ -6,6 +6,7 @@ export const environment = {
   postUrl: 'http://localhost:3000/post',
   utentiUrl: 'http://localhost:3000/utenti',
   cittaUrl: 'http://localhost:3000/citta',
+  risposteUrl: 'http://localhost:3000/risposte',
   production: false
 };
 
