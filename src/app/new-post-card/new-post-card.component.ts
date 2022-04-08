@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CittaService } from 'src/services/citta.service';
 import { UtentiService } from 'src/services/utenti.service';
 import { Post } from '../models/post';
@@ -10,7 +11,7 @@ import { Post } from '../models/post';
 })
 export class NewPostCardComponent implements OnInit{
 
-  constructor(private _utenti: UtentiService, private _citta: CittaService) { }
+  constructor(private route: Router, private _utenti: UtentiService, private _citta: CittaService) { }
 
   @Input()
   public post!: Post;
@@ -26,4 +27,10 @@ export class NewPostCardComponent implements OnInit{
       })
     })
   }
+
+  public openNewResponseForm(){
+    this.route.navigate(['/app-new-response-form']);
+  }
+
+  
 }

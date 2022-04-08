@@ -15,6 +15,8 @@ import {MatCardModule} from '@angular/material/card';
 import {HttpClientModule} from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NewResponseFormComponent } from './new-response-form/new-response-form.component';
+import { NewResponseCardComponent } from './new-response-card/new-response-card.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +24,8 @@ import { FormsModule } from '@angular/forms';
     MainPageComponent,
     NewPostFormComponent,
     NewPostCardComponent,
+    NewResponseFormComponent,
+    NewResponseCardComponent,
   ],
   imports: [
     BrowserModule,

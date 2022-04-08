@@ -6,5 +6,10 @@
   <mat-card-content>
     {{post.contenuto_post}}
   </mat-card-content>
+  <mat-card-actions align="end">
+    <div class="response-button">
+      <button mat-flat-button color="primary" (click)="openNewResponseForm()">Rispondi</button>
+  </div>
+  </mat-card-actions>
 
 </mat-card>

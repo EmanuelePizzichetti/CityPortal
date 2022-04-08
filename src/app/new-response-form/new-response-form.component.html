@@ -1,0 +1,18 @@
+<div class="new-response-form">
+    <p>Risposta</p><br>
+    <mat-form-field class="response-field" appearance="outline">
+        <mat-label>Inserisci qui... </mat-label>
+        <textarea matInput
+                  id="response-input"
+                  [(ngModel)]="model.contenuto_risposta"
+                  cdkTextareaAutosize
+                  #autosize="cdkTextareaAutosize"
+                  cdkAutosizeMinRows="5"
+                  cdkAutosizeMaxRows="7"></textarea>
+      </mat-form-field>
+</div>
+
+<div class="pubblica-risposta-button">
+<button mat-flat-button color="primary" (click)="pubblicaRisposta()">Pubblica Risposta</button>
+</div>
+
