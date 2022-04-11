@@ -34,7 +34,6 @@ app.get('/post/:id', (req,res)=>{
         }
         if(result){
             res.send({
-                message: "post con ID " + ID,
                 data: result
             })
         } else {

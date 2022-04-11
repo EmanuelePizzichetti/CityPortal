@@ -16,6 +16,11 @@ export class PostService {
     return this._http.get(environment.postUrl);
   }
 
+  getPostById(ID:Number):Observable<any>
+  {
+    return this._http.get(environment.postUrl + '/' + ID);
+  }
+
   createPost(data:Post):Observable<any>
   {
     return this._http.post(environment.postUrl, data);

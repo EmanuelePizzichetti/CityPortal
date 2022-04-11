@@ -1,18 +1,28 @@
+<mat-card class="resume-post">
+    <mat-card-title>{{post?.titolo_post}}</mat-card-title>
+    <mat-card-subtitle>{{post?.citta_post}}</mat-card-subtitle>
+    <mat-card-content>
+      {{post?.contenuto_post}}
+    </mat-card-content>
+</mat-card>
 <div class="new-response-form">
     <p>Risposta</p><br>
     <mat-form-field class="response-field" appearance="outline">
         <mat-label>Inserisci qui... </mat-label>
         <textarea matInput
-                  id="response-input"
+                  maxlength="1000"
                   [(ngModel)]="model.contenuto_risposta"
+                  #contenuto="ngModel" required
                   cdkTextareaAutosize
                   #autosize="cdkTextareaAutosize"
                   cdkAutosizeMinRows="5"
                   cdkAutosizeMaxRows="7"></textarea>
+                  <mat-error *ngIf="contenuto.errors?.['required'] && contenuto.touched">Campo Obbligatorio</mat-error>
+                  <mat-hint *ngIf="contenuto.touched && contenuto.value.length == 1000">Hai raggiunto il massimo di 1000 caratteri</mat-hint>
       </mat-form-field>
 </div>
 
 <div class="pubblica-risposta-button">
-<button mat-flat-button color="primary" (click)="pubblicaRisposta()">Pubblica Risposta</button>
+<button mat-flat-button color="primary" [disabled]="contenuto.errors?.['required']" (click)="pubblicaRisposta()">Pubblica Risposta</button>
 </div>
 

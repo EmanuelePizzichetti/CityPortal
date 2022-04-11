@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: '', component: MainPageComponent  },
   { path: 'app-new-post-form', component: NewPostFormComponent  },
  // { path: 'app-new-post-card', component: NewPostCardComponent  },
-  { path: 'app-new-response-form', component: NewResponseFormComponent  },
+  { path: 'app-new-response-form/:idPost', component: NewResponseFormComponent  },
   { path: '**', redirectTo: '' }
 ];
 
