@@ -1,0 +1,32 @@
+.registration-form{
+    position:relative;
+    top: 25px;
+    left: 550px;
+    width: 600px;
+    height: 600px;
+
+    
+}
+
+  .name-field{
+    width: 60%;
+  }
+  .city-field{
+    width: 60%;
+  }
+  .mail-field{
+    width: 60%;
+  }
+  .password-field{
+    width: 60%;
+  }
+  .confirm-password-field{
+    width: 60%;
+  }
+  .register-button button{
+    position:absolute;
+    top: 1030px;
+    left: 771px;
+    width: 140px;
+    height: 40px;
+  }

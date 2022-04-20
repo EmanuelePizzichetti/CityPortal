@@ -10,15 +10,33 @@ import { Post } from '../models/post';
 })
 export class MainPageComponent implements OnInit {
   public posts: Post[] = [];
+  isLogged: boolean = false;
   constructor(private route:Router, private _post: PostService) { }
 
   ngOnInit(): void {
     this._post.getAllPost().subscribe((res)=>{
       this.posts = res.data;
+      this.loadView("notLoggedUser");
     })
   }
 
   public openNewPostForm(){
     this.route.navigate(['/app-new-post-form']);
+  }
+
+  public loadView(tipoUtente : String){
+   
+      if(tipoUtente==="notLoggedUser"){
+        this.isLogged=false;
+       
+      }else if(tipoUtente==="loggedUser"){
+        this.isLogged=true;
+       }
+    
+    
+  }
+
+  public openRegistrationForm(){
+    this.route.navigate(['/app-registration-form']);
   }
 }

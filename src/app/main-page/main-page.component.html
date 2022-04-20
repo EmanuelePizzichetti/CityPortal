@@ -1,6 +1,16 @@
-<div>
-    <div class="new-post-button">
-        <button mat-flat-button color="primary" (click)="openNewPostForm()">Nuovo Post</button>
+<div class="not-logged-user" [style.display]="!isLogged ? 'block' : 'none'">
+    <div class="not-logged-links">
+        <p class="accedi-link">Accedi /</p> <p class="registrati-link" (click)="openRegistrationForm()"> Registrati</p>
+    </div>
+</div>
+<div class="logged-user" [style.display]="isLogged ? 'block' : 'none'">
+    <!-- TODO: al posto di "utente" ci sara' il nome dell'utente -->
+    <div class="welcome-message">Benvenuto Utente</div>
+    <div class="logout-link">Logout</div>
+    <div>
+        <div class="new-post-button">
+            <button mat-flat-button color="primary" (click)="openNewPostForm()">Nuovo Post</button>
+        </div>
     </div>
 </div>
 <div *ngFor="let post of posts.slice().reverse()">

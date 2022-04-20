@@ -1,0 +1,42 @@
+<div class="registration-form">
+    <p>I campi contrassegnati con * sono obbligatori</p><br>
+    <p>Nome / Nickname</p><br>
+    <mat-form-field class="name-field" appearance="outline" >
+        <mat-label>Inserisci quì...</mat-label>
+    <input matInput maxlength="45" [(ngModel)]="model.nome_utente" #nome="ngModel" required>
+    <mat-error *ngIf="nome.errors?.['required'] && nome.touched">Campo Obbligatorio</mat-error>
+        <mat-hint *ngIf="nome.touched && nome.value.length == 45">Hai raggiunto il massimo di 45 caratteri</mat-hint>
+    </mat-form-field>
+    <p>Citta'</p><br>
+    <mat-form-field class="city-field" appearance="outline" >
+      <mat-label>La città in cui vivi</mat-label>
+      <input matInput maxlength="40" [(ngModel)]="model.citta_utente" #citta="ngModel" required>
+      <mat-error *ngIf="citta.errors?.['required'] && citta.touched">Campo Obbligatorio</mat-error>
+      <mat-hint *ngIf="citta.touched && citta.value.length == 40">Hai raggiunto il massimo di 40 caratteri</mat-hint>
+    </mat-form-field>
+    <p>Indirizzo mail valido</p><br>
+    <mat-form-field class="mail-field" appearance="outline" >
+        <mat-label>Inserisci quì...</mat-label>
+        <input matInput maxlength="320" [(ngModel)]="model.mail_utente" #mail="ngModel" required>
+        <mat-error *ngIf="mail.errors?.['required'] && mail.touched">Campo Obbligatorio</mat-error>
+            <mat-hint *ngIf="mail.touched && mail.value.length == 320">Hai raggiunto il massimo di 320 caratteri</mat-hint>
+    </mat-form-field>
+    <p>Password</p><br>
+    <mat-form-field class="password-field" appearance="outline" >
+        <mat-label>Almeno 8 caratteri con lettere e numeri</mat-label>
+        <input matInput maxlength="16" [(ngModel)]="model.password_utente" #password="ngModel" required>
+        <mat-error *ngIf="password.errors?.['required'] && password.touched">Campo Obbligatorio</mat-error>
+            <mat-hint *ngIf="password.touched && password.value.length == 16">Hai raggiunto il massimo di 16 caratteri</mat-hint>
+    </mat-form-field>
+    <br>
+    <mat-form-field class="confirm-password-field" appearance="outline" >
+        <mat-label>Ripeti Password</mat-label>
+        <input matInput maxlength="16" required> 
+    </mat-form-field>
+    <!-- TODO: inserire controllo per vedere se la prima password è uguale alla seconda -->
+    
+</div>
+<div class="register-button">
+    <button mat-flat-button color="primary" [disabled]="nome.errors?.['required'] || mail.errors?.['required'] || password.errors?.['required']" (click)="registrazione()">Registrati</button>
+</div>
+
