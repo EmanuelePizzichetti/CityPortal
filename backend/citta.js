@@ -63,8 +63,8 @@ app.get('/citta/nome/:nome', (req,res)=>{
 })
 
 app.post('/citta', (req,res) => {
-    let nomeCitta = req.body.citta_post;
-    db.query('insert into citta(nome_citta) values(?)', [nomeCitta],(err, result) => {
+    let nome_citta = req.body.nome_citta;
+    db.query('insert into citta(nome_citta) values(?)', [nome_citta],(err, result) => {
         if(err){
             console.log('Errore');
         }

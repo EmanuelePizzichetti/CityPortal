@@ -25,17 +25,24 @@ export class NewPostFormComponent implements OnInit {
       this.sistemaStringa();
       this._citta.getCittaByNome(this.model.citta_post).subscribe((res)=>{
         if(res.data[0] === undefined) {
-          this._citta.createCitta(this.model).subscribe((res)=>{
+          this._citta.createCitta(this.model.citta_post).subscribe((res)=>{
             console.log(res);
+            this.model.citta_post = res.data.insertId.toString();
+            this._post.createPost(this.model).subscribe((res)=>{
+              console.log(res);
+              this.backHome();
+            })
           })
         }
-        this._citta.getCittaByNome(this.model.citta_post).subscribe((res)=>{
-          this.model.citta_post = res.data[0].id_citta_pk.toString();
-          this._post.createPost(this.model).subscribe((res)=>{
-            console.log(res);
-            this.backHome();
-          })  
-        })
+        else {
+          this._citta.getCittaByNome(this.model.citta_post).subscribe((res)=>{
+            this.model.citta_post = res.data[0].id_citta_pk.toString();
+            this._post.createPost(this.model).subscribe((res)=>{
+              console.log(res);
+              this.backHome();
+            })  
+          })
+        }
       })
     }
     else {

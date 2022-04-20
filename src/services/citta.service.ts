@@ -21,9 +21,9 @@ export class CittaService {
     return this._http.get(environment.cittaUrl + '/' + ID);
   }
 
-  createCitta(data:Post):Observable<any>
+  createCitta(nome:String):Observable<any>
   {
-    return this._http.post(environment.cittaUrl, data);
+    return this._http.post(environment.cittaUrl, {nome_citta: nome});
   }
 
 }
