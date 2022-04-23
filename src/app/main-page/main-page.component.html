@@ -1,6 +1,6 @@
 <div class="not-logged-user" [style.display]="!isLogged ? 'block' : 'none'">
     <div class="not-logged-links">
-        <p class="accedi-link">Accedi /</p> <p class="registrati-link" (click)="openRegistrationForm()"> Registrati</p>
+        <p class="accedi-link" (click)="openLoginForm()">Accedi /</p> <p class="registrati-link" (click)="openRegistrationForm()"> Registrati</p>
     </div>
 </div>
 <div class="logged-user" [style.display]="isLogged ? 'block' : 'none'">

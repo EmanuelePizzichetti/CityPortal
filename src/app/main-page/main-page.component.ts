@@ -39,4 +39,8 @@ export class MainPageComponent implements OnInit {
   public openRegistrationForm(){
     this.route.navigate(['/app-registration-form']);
   }
+
+  public openLoginForm(){
+    this.route.navigate(['/app-login-form']);
+  }
 }

@@ -1,0 +1,20 @@
+<div class="login-form">
+    <p>Inserisci le credenziali di accesso:</p><br>
+    <p>Nickname</p><br>
+    <mat-form-field class="nickname-field" appearance="outline" >
+        <mat-label>Inserisci quì...</mat-label>
+        <input matInput maxlength="45" [(ngModel)]="model.nome_utente" #nome="ngModel" required>
+    <mat-error *ngIf="nome.errors?.['required'] && nome.touched">E' richiesto un Nickname</mat-error>
+        <mat-hint *ngIf="nome.touched && nome.value.length == 45">Hai raggiunto il massimo di 45 caratteri</mat-hint>
+    </mat-form-field>
+    <p>Password</p><br>
+    <mat-form-field class="password-field" appearance="outline" >
+        <mat-label>Inserisci quì...</mat-label>
+        <input matInput maxlength="16" type="password" [(ngModel)]="model.password_utente" #password="ngModel" required>
+        <mat-error *ngIf="password.errors?.['required'] && password.touched">Password Obbligatoria</mat-error>
+            <mat-hint *ngIf="password.touched && password.value.length == 16">Hai raggiunto il massimo di 16 caratteri</mat-hint>
+    </mat-form-field>
+</div>
+<div class="login-button">
+    <button mat-flat-button color="primary" [disabled]="nome.errors?.['required'] || password.errors?.['required']" (click)="login()">Accedi</button>
+</div>

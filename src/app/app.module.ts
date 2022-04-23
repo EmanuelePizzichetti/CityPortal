@@ -18,6 +18,7 @@ import { FormsModule } from '@angular/forms';
 import { NewResponseFormComponent } from './new-response-form/new-response-form.component';
 import { NewResponseCardComponent } from './new-response-card/new-response-card.component';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
+import { LoginFormComponent } from './login-form/login-form.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { RegistrationFormComponent } from './registration-form/registration-form
     NewResponseFormComponent,
     NewResponseCardComponent,
     RegistrationFormComponent,
+    LoginFormComponent,
   ],
   imports: [
     BrowserModule,
