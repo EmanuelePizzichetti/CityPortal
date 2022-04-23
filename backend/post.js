@@ -45,7 +45,7 @@ app.get('/post/:id', (req,res)=>{
 })
 
 app.post('/post', (req,res) => {
-    let idUtente = 1;
+    let idUtente = req.body.id_utente_fk;
     let idCitta = req.body.citta_post;
     let titoloPost = req.body.titolo_post;
     let contenutoPost = req.body.contenuto_post;

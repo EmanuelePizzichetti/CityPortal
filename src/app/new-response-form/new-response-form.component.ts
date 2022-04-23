@@ -7,6 +7,8 @@ import { RisposteService } from 'src/services/risposte.service';
 import { Post } from '../models/post';
 import { PostService } from 'src/services/post.service';
 import { CittaService } from 'src/services/citta.service';
+import { AuthenticationService } from 'src/services/authentication.service';
+import { UtentiService } from 'src/services/utenti.service';
 
 @Component({
   selector: 'app-new-response-form',
@@ -19,9 +21,11 @@ export class NewResponseFormComponent implements OnInit {
   public post!: Post;
   public model: Risposta = new Risposta();
 
-  constructor(private actRoute: ActivatedRoute, private route: Router, private _ngZone: NgZone, private _risposta: RisposteService, private _post: PostService, private _citta: CittaService) { }
+  constructor(private actRoute: ActivatedRoute, private route: Router, private _ngZone: NgZone, private _risposta: RisposteService, private _post: PostService, private _citta: CittaService, private _utenti: UtentiService, private _auth: AuthenticationService) { }
 
   ngOnInit(): void {
+    const id = this._auth.getUserID();
+    this.model.id_utente_fk = id?+id:0;
     this.idPost = this.actRoute.snapshot.paramMap.get('idPost');
     this.model.id_post_fk = this.idPost?+this.idPost:0;
     this._post.getPostById(this.model.id_post_fk).subscribe((res)=>{
@@ -33,11 +37,17 @@ export class NewResponseFormComponent implements OnInit {
   }
 
   public pubblicaRisposta(){
-    this.model.id_utente_fk = 1;
     if(!(this.model.contenuto_risposta.replace(/\s/g, '').length == 0)) {
-      this._risposta.createRisposta(this.model).subscribe((res)=>{
-        console.log(res);
-        this.backHome();
+      this._utenti.verifica(this.model.id_utente_fk).subscribe((res)=>{
+        if(res.data != 0) {
+          this._risposta.createRisposta(this.model).subscribe((res)=>{
+            console.log(res);
+            this.backHome();
+          })
+        }
+        else{
+          alert("mismatch tra gli ID");
+        }
       })
     }
     else {

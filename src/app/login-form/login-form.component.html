@@ -10,7 +10,7 @@
     <p>Password</p><br>
     <mat-form-field class="password-field" appearance="outline" >
         <mat-label>Inserisci quì...</mat-label>
-        <input matInput maxlength="16" type="password" [(ngModel)]="model.password_utente" #password="ngModel" required>
+        <input matInput maxlength="16" type="password" id="idPassword" [(ngModel)]="model.password_utente" #password="ngModel" required>
         <mat-error *ngIf="password.errors?.['required'] && password.touched">Password Obbligatoria</mat-error>
             <mat-hint *ngIf="password.touched && password.value.length == 16">Hai raggiunto il massimo di 16 caratteri</mat-hint>
     </mat-form-field>

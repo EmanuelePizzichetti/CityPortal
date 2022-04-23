@@ -4,12 +4,11 @@
     </div>
 </div>
 <div class="logged-user" [style.display]="isLogged ? 'block' : 'none'">
-    <!-- TODO: al posto di "utente" ci sara' il nome dell'utente -->
-    <div class="welcome-message">Benvenuto Utente</div>
-    <div class="logout-link">Logout</div>
+    <div class="welcome-message">Benvenuto {{nome_utente}}</div>
+    <div class="logout-link" (click)="logout()">Logout</div>
     <div>
         <div class="new-post-button">
-            <button mat-flat-button color="primary" (click)="openNewPostForm()">Nuovo Post</button>
+            <button mat-flat-button color="primary" (click)="openNewPostForm()" [style.display]="isLogged ? 'block' : 'none'">Nuovo Post</button>
         </div>
     </div>
 </div>

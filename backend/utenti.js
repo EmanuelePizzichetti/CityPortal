@@ -1,10 +1,14 @@
+const authenticationCheck = require('./authMiddleware');
 const express = require('express');
 const bodyparser = require('body-parser');
 const cors = require('cors');
 const db = require('./dbService');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const dotnev = require('dotenv');
 const app = express();
 
+dotnev.config({path: './backend/.env'});
 app.use(cors());
 app.use(bodyparser.json());
 
@@ -45,6 +49,25 @@ app.get('/utenti/:id', (req,res)=>{
     });
 })
 
+app.get('/utenti/check/:nome/:mail', (req,res)=>{
+    nome_utente = req.params.nome;
+    mail_utente = req.params.mail;
+    db.query('select * from utenti where nome_utente = ? or mail_utente = ?', [nome_utente, mail_utente], (err,result) => {
+        if(err){
+            console.log('Errore');
+        }
+        if(result){
+            res.send({
+                data: result
+            })
+        } else {
+            res.send({
+                message: "Non sono stati trovati valori" 
+            }) 
+        }
+    });
+})
+
 app.post('/utenti/register', async (req,res)=>{
     try {
         const hashedPassword = await bcrypt.hash(req.body.password_utente, 10)
@@ -59,10 +82,11 @@ app.post('/utenti/register', async (req,res)=>{
                 console.log('Errore');
             }
             if(result){
-                console.log('Utente aggiunto');
+                res.send({
+                    message: "Utente Registrato" 
+                }) 
             } 
         })
-        res.status(201).send();
     } catch {
         res.status(500).send();
     }
@@ -81,20 +105,44 @@ app.post('/utenti/login', async (req, res)=>{
                         id_utente_pk: result[0].id_utente_pk,
                         nome_utente: result[0].nome_utente,
                         mail_utente: result[0].mail_utente,
-                        id_citta_fk: result[0].id_citta_fk
+                        id_citta_fk: result[0].id_citta_fk,
+                        ruolo : 'user',
                     }
-                    res.json(user);
+                    const token = jwt.sign(user, process.env.ACCESS_TOKEN_KEY)
+                    res.send({
+                        data: user,
+                        token: token
+                    })
                 }
                 else {
-                    res.status(400).send('Non esistono utenti con queste credenziali');
+                    res.send({
+                        data: 0
+                    })
                 }
             }
             else {
-                res.status(400).send('Non esistono utenti con queste credenziali');
+                res.send({
+                    data: 0
+                })
             }
         })  
     } catch {
         res.status(500).send()
+    }
+})
+
+app.post('/utenti/verifica', authenticationCheck, (req,res,next) => {
+    const userID = req.body.ID;
+    const ruolo = req.body.ruolo;
+    if(res.locals.auth && res.locals.auth.id_utente_pk && res.locals.auth.ruolo && userID === res.locals.auth.id_utente_pk && ruolo === res.locals.auth.ruolo) {
+        res.send({
+            data: 1
+        })
+    }
+    else {
+        res.send({
+            data: 0
+        })
     }
 })
 

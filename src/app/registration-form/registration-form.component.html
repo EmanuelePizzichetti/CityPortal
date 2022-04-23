@@ -17,26 +17,30 @@
     <p>Indirizzo mail valido</p><br>
     <mat-form-field class="mail-field" appearance="outline" >
         <mat-label>Inserisci quì...</mat-label>
-        <input matInput maxlength="320" [(ngModel)]="model.mail_utente" #mail="ngModel" required>
+        <input matInput maxlength="320" type="email" [(ngModel)]="model.mail_utente" #mail="ngModel" required [email]="true">
         <mat-error *ngIf="mail.errors?.['required'] && mail.touched">Campo Obbligatorio</mat-error>
-            <mat-hint *ngIf="mail.touched && mail.value.length == 320">Hai raggiunto il massimo di 320 caratteri</mat-hint>
+        <mat-hint *ngIf="mail.touched && mail.errors?.['email']">Formato mail non valido</mat-hint>
     </mat-form-field>
     <p>Password</p><br>
     <mat-form-field class="password-field" appearance="outline" >
         <mat-label>Almeno 8 caratteri con lettere e numeri</mat-label>
-        <input matInput maxlength="16" [(ngModel)]="model.password_utente" #password="ngModel" required>
+        <input matInput maxlength="16" minlength="8" [type]="mostra ? 'text' : 'password'" [(ngModel)]="model.password_utente" #password="ngModel" required>
         <mat-error *ngIf="password.errors?.['required'] && password.touched">Campo Obbligatorio</mat-error>
-            <mat-hint *ngIf="password.touched && password.value.length == 16">Hai raggiunto il massimo di 16 caratteri</mat-hint>
+        <mat-hint *ngIf="password.touched && password.value.length == 16">Hai raggiunto il massimo di 16 caratteri</mat-hint>
+        <mat-hint *ngIf="password.touched && password.value.length < 8">Devi inserire almeno 8 caratteri</mat-hint>
     </mat-form-field>
     <br>
     <mat-form-field class="confirm-password-field" appearance="outline" >
         <mat-label>Ripeti Password</mat-label>
-        <input matInput maxlength="16" required> 
+        <input matInput maxlength="16" minlength="8" [type]="mostra ? 'text' : 'password'" [(ngModel)]="model.conferma_password" #conferma="ngModel" required> 
+        <mat-error *ngIf="conferma.errors?.['required'] && conferma.touched">Campo Obbligatorio</mat-error>
+        <mat-hint *ngIf="conferma.touched && conferma.value.length < 8">Devi inserire almeno 8 caratteri</mat-hint>
+        <mat-hint *ngIf="conferma.touched && conferma.value.length >= 8 && conferma.value != password.value && conferma.value.length < 16">Le due password non coincidono</mat-hint>
     </mat-form-field>
-    <!-- TODO: inserire controllo per vedere se la prima password è uguale alla seconda -->
-    
+    <br>
+    <input type="checkbox" (click)="mostraPassword()">Mostra Password
 </div>
 <div class="register-button">
-    <button mat-flat-button color="primary" [disabled]="nome.errors?.['required'] || mail.errors?.['required'] || password.errors?.['required']" (click)="registrazione()">Registrati</button>
+    <button mat-flat-button color="primary" [disabled]="nome.errors?.['required'] || citta.errors?.['required'] || mail.errors?.['required'] || mail.errors?.['email'] || password.errors?.['required'] || password.errors?.['minlength'] || conferma.errors?.['required'] || conferma.errors?.['minlength'] || password.value != conferma.value" (click)="registrazione()">Registrati</button>
 </div>
 

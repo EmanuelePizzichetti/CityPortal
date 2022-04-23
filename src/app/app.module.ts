@@ -12,12 +12,13 @@ import {TextFieldModule} from '@angular/cdk/text-field';
 import {MatButtonModule} from '@angular/material/button';
 import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NewResponseFormComponent } from './new-response-form/new-response-form.component';
 import { NewResponseCardComponent } from './new-response-card/new-response-card.component';
 import { RegistrationFormComponent } from './registration-form/registration-form.component';
+import { JwtInterceptor } from 'src/interceptors/jwt.interceptor';
 import { LoginFormComponent } from './login-form/login-form.component';
 
 @NgModule({
@@ -29,7 +30,7 @@ import { LoginFormComponent } from './login-form/login-form.component';
     NewResponseFormComponent,
     NewResponseCardComponent,
     RegistrationFormComponent,
-    LoginFormComponent,
+    LoginFormComponent
   ],
   imports: [
     BrowserModule,
@@ -44,7 +45,9 @@ import { LoginFormComponent } from './login-form/login-form.component';
     MatCardModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

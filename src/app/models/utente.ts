@@ -6,4 +6,5 @@ export class Utente {
     stato_utente = '';
     id_citta_fk = 0;
     citta_utente = '';
+    conferma_password = '';
 }

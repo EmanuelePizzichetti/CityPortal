@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/services/authentication.service';
 import { CittaService } from 'src/services/citta.service';
 import { RisposteService } from 'src/services/risposte.service';
 import { UtentiService } from 'src/services/utenti.service';
@@ -15,13 +16,17 @@ export class NewPostCardComponent implements OnInit{
 
   public mostraRisposte = false;
   public risposte: Risposta[] = [];
+  public canAnswer = false;
 
-  constructor(private route: Router, private _utenti: UtentiService, private _citta: CittaService, private _risposte: RisposteService) { }
+  constructor(private route: Router, private _utenti: UtentiService, private _citta: CittaService, private _risposte: RisposteService, private _auth: AuthenticationService) { }
 
   @Input()
   public post!: Post;
 
   ngOnInit(): void {
+    if(this._auth.getUserID() != null || undefined) {
+      this.canAnswer = true;
+    }
     this._citta.getCittaById(this.post.id_citta_fk).subscribe((res)=>{
       this.post.citta_post = res.data[0].nome_citta.toUpperCase();
     })

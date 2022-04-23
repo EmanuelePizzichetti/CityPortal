@@ -15,15 +15,20 @@ export class UtentiService {
   {
     return this._http.get(environment.utentiUrl + '/' + ID);
   }
+
+  checkIfAlreadyExist(data:Utente):Observable<any>
+  {
+    return this._http.get(environment.utentiUrl + '/check/' + data.nome_utente + '/' + data.mail_utente)
+  }
   
   register(data:Utente):Observable<any>
   {
     return this._http.post(environment.utentiUrl + '/register', data);
   }
 
-  login(data:Utente):Observable<any>
+  verifica(ID:Number):Observable<any>
   {
-    return this._http.post(environment.utentiUrl + '/login', data);
+    return this._http.post(environment.utentiUrl + '/verifica', { ID: ID, ruolo: localStorage.getItem('ruolo')});
   }
 
 }

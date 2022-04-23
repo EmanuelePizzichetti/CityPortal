@@ -1,35 +1,35 @@
 <div class="new-post-form">
-    <p>Citta'</p><br>
-    <mat-form-field class="city-field" appearance="outline" >
-      <mat-label>es. Roma, Milano, Napoli</mat-label>
-      <input matInput maxlength="40" [(ngModel)]="model.citta_post" #citta="ngModel" required>
-      <mat-error *ngIf="citta.errors?.['required'] && citta.touched">Campo Obbligatorio</mat-error>
-      <mat-hint *ngIf="citta.touched && citta.value.length == 40">Hai raggiunto il massimo di 40 caratteri</mat-hint>
-    </mat-form-field>
-    <p>Titolo</p><br>
-    <mat-form-field class="title-field" appearance="outline" >
-      <mat-label>Inserisci qui...</mat-label>
-      <input matInput maxlength="150" [(ngModel)]="model.titolo_post" #titolo="ngModel" required>
-      <mat-error *ngIf="titolo.errors?.['required'] && titolo.touched">Campo Obbligatorio</mat-error>
-      <mat-hint *ngIf="titolo.touched && titolo.value.length == 150">Hai raggiunto il massimo di 150 caratteri</mat-hint>
-    </mat-form-field>
-    <p>Post</p><br>
-    <mat-form-field class="post-field" appearance="outline">
-      <mat-label>Inserisci qui... </mat-label>
-      <textarea matInput
-                maxlength="2500"
-                [(ngModel)]="model.contenuto_post"
-                #contenuto="ngModel" required
-                cdkTextareaAutosize
-                #autosize="cdkTextareaAutosize"
-                cdkAutosizeMinRows="5"
-                cdkAutosizeMaxRows="7"></textarea>
-      <mat-error *ngIf="contenuto.errors?.['required'] && contenuto.touched">Campo Obbligatorio</mat-error>
-      <mat-hint *ngIf="contenuto.touched && contenuto.value.length == 2500">Hai raggiunto il massimo di 2500 caratteri</mat-hint>
-    </mat-form-field>
+  <p>Citta'</p><br>
+  <mat-form-field class="city-field" appearance="outline" >
+    <mat-label>es. Roma, Milano, Napoli</mat-label>
+    <input matInput maxlength="40" [(ngModel)]="model.citta_post" #citta="ngModel" required>
+    <mat-error *ngIf="citta.errors?.['required'] && citta.touched">Campo Obbligatorio</mat-error>
+    <mat-hint *ngIf="citta.touched && citta.value.length == 40">Hai raggiunto il massimo di 40 caratteri</mat-hint>
+  </mat-form-field>
+  <p>Titolo</p><br>
+  <mat-form-field class="title-field" appearance="outline" >
+    <mat-label>Inserisci qui...</mat-label>
+    <input matInput maxlength="150" [(ngModel)]="model.titolo_post" #titolo="ngModel" required>
+    <mat-error *ngIf="titolo.errors?.['required'] && titolo.touched">Campo Obbligatorio</mat-error>
+    <mat-hint *ngIf="titolo.touched && titolo.value.length == 150">Hai raggiunto il massimo di 150 caratteri</mat-hint>
+  </mat-form-field>
+  <p>Post</p><br>
+  <mat-form-field class="post-field" appearance="outline">
+    <mat-label>Inserisci qui... </mat-label>
+    <textarea matInput
+              maxlength="2500"
+              [(ngModel)]="model.contenuto_post"
+              #contenuto="ngModel" required
+              cdkTextareaAutosize
+              #autosize="cdkTextareaAutosize"
+              cdkAutosizeMinRows="5"
+              cdkAutosizeMaxRows="7"></textarea>
+    <mat-error *ngIf="contenuto.errors?.['required'] && contenuto.touched">Campo Obbligatorio</mat-error>
+    <mat-hint *ngIf="contenuto.touched && contenuto.value.length == 2500">Hai raggiunto il massimo di 2500 caratteri</mat-hint>
+  </mat-form-field>
 
-  </div>
-  <div class="pubblica-button">
-    <button mat-flat-button color="primary" [disabled]="citta.errors?.['required'] || titolo.errors?.['required'] || contenuto.errors?.['required']" (click)="pubblica()">Pubblica</button>
 </div>
-  
+<div class="pubblica-button">
+  <button mat-flat-button color="primary" [disabled]="citta.errors?.['required'] || titolo.errors?.['required'] || contenuto.errors?.['required']" (click)="pubblica()">Pubblica</button>
+</div>
+

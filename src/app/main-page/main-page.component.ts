@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthenticationService } from 'src/services/authentication.service';
 import { PostService } from 'src/services/post.service';
+import { UtentiService } from 'src/services/utenti.service';
 import { Post } from '../models/post';
 
 @Component({
@@ -11,29 +13,24 @@ import { Post } from '../models/post';
 export class MainPageComponent implements OnInit {
   public posts: Post[] = [];
   isLogged: boolean = false;
-  constructor(private route:Router, private _post: PostService) { }
+  public nome_utente = '';
+  constructor(private route:Router, private _post: PostService, private _auth: AuthenticationService, private _utenti: UtentiService) { }
 
   ngOnInit(): void {
+    if(this._auth.getUserID() != null || undefined) {
+      const userID = this._auth.getUserID();
+      this.isLogged = true;
+      this._utenti.getUserById(userID?+userID:0).subscribe((res)=>{
+        this.nome_utente = res.data[0].nome_utente;
+      })
+    }
     this._post.getAllPost().subscribe((res)=>{
       this.posts = res.data;
-      this.loadView("notLoggedUser");
     })
   }
 
   public openNewPostForm(){
     this.route.navigate(['/app-new-post-form']);
-  }
-
-  public loadView(tipoUtente : String){
-   
-      if(tipoUtente==="notLoggedUser"){
-        this.isLogged=false;
-       
-      }else if(tipoUtente==="loggedUser"){
-        this.isLogged=true;
-       }
-    
-    
   }
 
   public openRegistrationForm(){
@@ -42,5 +39,10 @@ export class MainPageComponent implements OnInit {
 
   public openLoginForm(){
     this.route.navigate(['/app-login-form']);
+  }
+
+  public logout(){
+    localStorage.clear();
+    window.location.reload();
   }
 }

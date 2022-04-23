@@ -5,6 +5,8 @@ import { Post } from '../models/post';
 import { Router } from '@angular/router';
 import { CittaService } from 'src/services/citta.service';
 import { PostService } from 'src/services/post.service';
+import { AuthenticationService } from 'src/services/authentication.service';
+import { UtentiService } from 'src/services/utenti.service';
 
 @Component({
   selector: 'app-new-post-form',
@@ -15,33 +17,42 @@ export class NewPostFormComponent implements OnInit {
 
   public model: Post = new Post();
 
-  constructor(private route: Router, private _ngZone: NgZone, private _citta: CittaService, private _post: PostService) { }
+  constructor(private route: Router, private _ngZone: NgZone, private _citta: CittaService, private _post: PostService, private _utenti: UtentiService, private _auth: AuthenticationService) { }
 
   ngOnInit(): void {
+    const id = this._auth.getUserID();
+    this.model.id_utente_fk = id?+id:0;
   }
 
   public pubblica() {
     if(!(this.model.citta_post.replace(/\s/g, '').length == 0 || this.model.titolo_post.replace(/\s/g, '').length == 0 || this.model.contenuto_post.replace(/\s/g, '').length == 0)) {
       this.sistemaStringa();
-      this._citta.getCittaByNome(this.model.citta_post).subscribe((res)=>{
-        if(res.data[0] === undefined) {
-          this._citta.createCitta(this.model.citta_post).subscribe((res)=>{
-            console.log(res);
-            this.model.citta_post = res.data.insertId.toString();
-            this._post.createPost(this.model).subscribe((res)=>{
-              console.log(res);
-              this.backHome();
-            })
+      this._utenti.verifica(this.model.id_utente_fk).subscribe((res)=>{
+        if(res.data != 0) {
+          this._citta.getCittaByNome(this.model.citta_post).subscribe((res)=>{
+            if(res.data[0] === undefined) {
+              this._citta.createCitta(this.model.citta_post).subscribe((res)=>{
+                console.log(res);
+                this.model.citta_post = res.data.insertId.toString();
+                this._post.createPost(this.model).subscribe((res)=>{
+                  console.log(res);
+                  this.backHome();
+                })
+              })
+            }
+            else {
+              this._citta.getCittaByNome(this.model.citta_post).subscribe((res)=>{
+                this.model.citta_post = res.data[0].id_citta_pk.toString();
+                this._post.createPost(this.model).subscribe((res)=>{
+                  console.log(res);
+                  this.backHome();
+                })  
+              })
+            }
           })
         }
         else {
-          this._citta.getCittaByNome(this.model.citta_post).subscribe((res)=>{
-            this.model.citta_post = res.data[0].id_citta_pk.toString();
-            this._post.createPost(this.model).subscribe((res)=>{
-              console.log(res);
-              this.backHome();
-            })  
-          })
+          alert("mismatch tra gli ID");
         }
       })
     }
