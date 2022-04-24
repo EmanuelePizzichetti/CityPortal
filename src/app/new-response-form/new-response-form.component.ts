@@ -29,6 +29,9 @@ export class NewResponseFormComponent implements OnInit {
     this.idPost = this.actRoute.snapshot.paramMap.get('idPost');
     this.model.id_post_fk = this.idPost?+this.idPost:0;
     this._post.getPostById(this.model.id_post_fk).subscribe((res)=>{
+      if(res.data[0] == undefined) {
+        this.backHome();
+      }
       this.post = res.data[0];
       this._citta.getCittaById(this.post.id_citta_fk).subscribe((res)=>{
         this.post.citta_post = res.data[0].nome_citta.toUpperCase();

@@ -39,4 +39,12 @@ export class AuthenticationService {
   getUserID(): String | null {
     return localStorage.getItem('userID');
   }
+
+  isAuthenticated(): boolean {
+    if(this.getToken() == undefined || null) {
+      return false;
+    }
+    return true;
+  }
+  
 }
