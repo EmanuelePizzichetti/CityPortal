@@ -44,6 +44,26 @@ app.get('/post/:id', (req,res)=>{
     });
 })
 
+app.get('/post/filter/:nome', (req,res)=>{
+    let nome_citta = req.params.nome;
+    db.query('select * from post,citta where post.id_citta_fk = citta.id_citta_pk and citta.nome_citta = ?', [nome_citta], (err,result) => {
+        if(err){
+            console.log('Errore');
+        }
+        if(result){
+            res.send({
+                message: "Tutti i post da " + nome_citta,
+                data: result
+            })
+        } else {
+            res.send({
+                message: "Non sono stati trovati valori" 
+            })   
+        }
+    }
+    );
+})  
+
 app.post('/post', (req,res) => {
     let idUtente = req.body.id_utente_fk;
     let idCitta = req.body.citta_post;

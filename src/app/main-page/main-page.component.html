@@ -1,3 +1,14 @@
+<div class="filtro-citta">
+    <mat-form-field appearance="outline" >
+        <mat-label>Cerca post per città</mat-label>
+        <input matInput [(ngModel)]="filtroCitta" #citta="ngModel">
+    </mat-form-field>
+</div>
+<div class="filtro-button">
+    <button mat-fab color="primary" aria-label="Example" (click)="filterON()">
+        <mat-icon class ="search-icon">search icon</mat-icon>
+    </button> 
+</div>
 <div class="not-logged-user" [style.display]="!isLogged ? 'block' : 'none'">
     <div class="not-logged-links">
         <p class="accedi-link" (click)="openLoginForm()">Accedi /</p> <p class="registrati-link" (click)="openRegistrationForm()"> Registrati</p>

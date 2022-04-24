@@ -16,6 +16,11 @@ export class PostService {
     return this._http.get(environment.postUrl);
   }
 
+  getPostByNomeCitta(nome:String):Observable<any>
+  {
+    return this._http.get(environment.postUrl + '/filter/' + nome);
+  }
+
   getPostById(ID:Number):Observable<any>
   {
     return this._http.get(environment.postUrl + '/' + ID);

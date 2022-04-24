@@ -7,12 +7,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MainPageComponent } from './main-page/main-page.component';
 import { NewPostFormComponent } from './new-post-form/new-post-form.component';
 import { NewPostCardComponent } from './new-post-card/new-post-card.component';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {TextFieldModule} from '@angular/cdk/text-field';
-import {MatButtonModule} from '@angular/material/button';
-import {MatInputModule} from '@angular/material/input';
-import {MatCardModule} from '@angular/material/card';
-import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { TextFieldModule } from '@angular/cdk/text-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NewResponseFormComponent } from './new-response-form/new-response-form.component';
@@ -43,7 +44,8 @@ import { LoginFormComponent } from './login-form/login-form.component';
     MatButtonModule,
     MatInputModule,
     MatCardModule,
-    HttpClientModule
+    HttpClientModule,
+    MatIconModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
