@@ -95,7 +95,7 @@ app.post('/utenti/register', async (req,res)=>{
 app.post('/utenti/login', async (req, res)=>{
     nome_utente = req.body.nome_utente;
     try {
-        db.query('select * from utenti where nome_utente = ?', [nome_utente], async function(err,result) {
+        db.query('select * from utenti where nome_utente = BINARY ?', [nome_utente], async function(err,result) {
             if(err){
                 res.status(500).send();
             }
