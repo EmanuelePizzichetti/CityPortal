@@ -17,6 +17,7 @@ export class NewPostCardComponent implements OnInit{
   public mostraRisposte = false;
   public risposte: Risposta[] = [];
   public canAnswer = false;
+  public numRisposte = 0;
 
   constructor(private route: Router, private _utenti: UtentiService, private _citta: CittaService, private _risposte: RisposteService, private _auth: AuthenticationService) { }
 
@@ -37,6 +38,7 @@ export class NewPostCardComponent implements OnInit{
       })
     })
     this._risposte.getRisposteByPost(this.post.id_post_pk).subscribe((res)=>{
+      this.numRisposte = res.data.length;
       this.risposte = res.data;
     })
   }

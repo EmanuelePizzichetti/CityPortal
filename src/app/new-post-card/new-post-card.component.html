@@ -11,7 +11,10 @@
       <button mat-flat-button color="primary" (click)="openNewResponseForm()" [style.display]="canAnswer ? 'block' : 'none'">Rispondi</button>
   </div>
   </mat-card-actions>
-  <div class="mostra-risposte"><u (click)="this.mostraRisposte = !this.mostraRisposte">Mostra Risposte</u></div>
+  <div class="mostra-risposte">
+    <u (click)="this.mostraRisposte = !this.mostraRisposte" [style.display]="numRisposte != 0 ? 'block' : 'none'">Mostra Risposte ({{numRisposte}})</u>
+    <u [style.display]="numRisposte == 0 ? 'block' : 'none'">Non ci sono risposte</u>    
+  </div>
 </mat-card>
 <div *ngIf="mostraRisposte">
   <div *ngFor="let risposta of risposte">

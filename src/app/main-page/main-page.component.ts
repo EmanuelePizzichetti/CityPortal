@@ -60,6 +60,7 @@ export class MainPageComponent implements OnInit {
         this.posts = res.data;
         if(this.posts.length == 0){
           alert('Non ci sono post relativi a questa città');
+          this.ngOnInit();
         }
     })
   }   
